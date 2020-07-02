@@ -2,25 +2,15 @@
 const Builder = @import("std").build.Builder;
 const CrossTarget = @import("std").zig.CrossTarget;
 const Abi = @import("std").Target.Abi;
-
 pub fn build(b: *Builder) void {
-    // Standard target options allows the person running `zig build` to choose
-    // what target to build for. Here we do not override the defaults, which
-    // means any target is allowed, and the default is native. Other options
-    // for restricting supported target set are available.
     const target = b.standardTargetOptions(.{ .default_target = CrossTarget{ .abi = Abi.gnu } });
-
-    // Standard release options allow the person running `zig build` to select
-    // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall.
     const mode = b.standardReleaseOptions();
-
-    const exe = b.addExecutable("zig-gnu-starter", "console.zig");
-    exe.addPackagePath("win32", "./zig-win32/src/main.zig");
+    const exe = b.addExecutable("win-message-box", "win-message-box.zig");
+    exe.addPackagePath("win32", "./../zig-win32/src/main.zig");
     exe.linkSystemLibrary("c");
     exe.linkSystemLibrary("gdi32");
     exe.linkSystemLibrary("user32");
     exe.linkSystemLibrary("kernel32");
-
     exe.setTarget(target);
     exe.setBuildMode(mode);
     exe.install();
