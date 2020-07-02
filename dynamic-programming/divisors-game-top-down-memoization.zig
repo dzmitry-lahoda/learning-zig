@@ -5,18 +5,11 @@ var l = [2][256]u32{
 };
 
 fn solve(n:u32, isa: bool) bool {
-    var x = l[1][244];
-    if (n == 2) {
-        return true;
-    }
-    if (n == 3) {
-        return false;
-    }
-    var an:u8 = if (isa) 0 else 1;
-    
-    if (l[an][n] != 0) {
+    if (n == 2) return true;    
+    if (n == 3) return false;
+    var an:u8 = if (isa) 0 else 1;    
+    if (l[an][n] != 0) 
         return if (l[an][n] == 1) true else false;
-    }
 
     var ans = !isa;
     var i:u32 = 1;
@@ -25,12 +18,11 @@ fn solve(n:u32, isa: bool) bool {
         if (n % i == 0){
             if (isa) {
                 ans = ans or solve(n-i, false);
-            } else {
-                ans = ans and solve(n-i, true);
-            }
+            } else
+                ans = ans and solve(n-i, true);        
         }
     }
-
+    
     l[an][n] = if (ans) 1 else 2;
 
     return ans;

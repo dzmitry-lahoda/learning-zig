@@ -4,3 +4,4 @@ zig-cache
 *.pdb
 *.zig~
 *.un~
+zig-win32
