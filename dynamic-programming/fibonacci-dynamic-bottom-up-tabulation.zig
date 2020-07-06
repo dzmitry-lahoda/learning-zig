@@ -2,16 +2,19 @@ const assert = @import("std").debug.assert;
 const print = @import("std").debug.print;
 var lookup = [_]u32{0} ** 256;
 fn fib(n:u32) u32{
-    lookup[0] = 0;
-    lookup[1] = 1;
+    var v0:u32 = 0;
+    var v1:u32 = 1;
+    var vn:u32 = v1;    
     var i:u32 = 0;
     if (n >= 2) {
        while (i <= n - 2): (i+=1){
-            lookup[i+2] = lookup[i+1] + lookup[i];
+            vn = v1 + v0;
+            v0 = v1;
+            v1 = vn;            
         }
     }
 
-    return lookup[n];
+    return vn;
 }
 
 test "fibonacci" {
