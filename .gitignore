@@ -5,3 +5,4 @@ zig-cache
 *.zig~
 *.un~
 zig-win32
+.ionide
