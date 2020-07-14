@@ -1,6 +1,5 @@
 const assert = @import("std").debug.assert;
 const print = @import("std").debug.print;
-var lookup = [_]u32{0} ** 256;
 fn fib(n:u32) u32{
     var v0:u32 = 0;
     var v1:u32 = 1;
